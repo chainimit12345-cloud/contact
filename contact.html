@@ -2,22 +2,15 @@
 <html lang="th">
   <head>
     <meta charset="UTF-8" />
-    <!-- แก้ไขบรรทัดนี้: เพิ่มการล็อคซูม (user-scalable=no) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>ข้อมูลติดเพิ่มเติม</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
       :root {
-        /* โทนสี Ocean Aurora (ฟ้าคราม - น้ำเงิน - ม่วง) */
+        /* โทนสี Ocean Aurora */
         --bg-color: #f3f8ff;
         --glass-bg: rgba(255, 255, 255, 0.75);
         --glass-border: rgba(255, 255, 255, 1);
@@ -28,14 +21,7 @@
 
         /* สีแบรนด์ Social Media */
         --fb-color: #1877f2;
-        --ig-gradient: linear-gradient(
-          45deg,
-          #f09433,
-          #e6683c,
-          #dc2743,
-          #cc2366,
-          #bc1888
-        );
+        --ig-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
         --tiktok-color: #0f172a;
         --line-color: #00c300;
       }
@@ -53,70 +39,60 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 40px 20px;
+        /* ค่าเริ่มต้นสำหรับมือถือ: ลด Padding */
+        padding: 20px 15px; 
         overflow-x: hidden;
         position: relative;
-        /* ป้องกันการเผลอทัชหรือคลุมดำข้อความที่อาจทำให้จอขยับ */
         -webkit-text-size-adjust: 100%;
       }
 
       /* กราฟิกแสงออร่า */
-      .glow-orb-1,
-      .glow-orb-2,
-      .glow-orb-3 {
+      .glow-orb-1, .glow-orb-2, .glow-orb-3 {
         position: absolute;
         border-radius: 50%;
-        filter: blur(100px);
+        filter: blur(80px); /* ลดความเบลอในมือถือให้เครื่องไม่หน่วง */
         z-index: 0;
         opacity: 0.5;
       }
 
       .glow-orb-1 {
-        width: 500px;
-        height: 500px;
+        width: 300px; height: 300px; /* ย่อขนาดออร่าในมือถือ */
         background: #00c6ff;
-        top: -100px;
-        left: -150px;
+        top: -50px; left: -50px;
         animation: drift 12s infinite alternate ease-in-out;
       }
 
       .glow-orb-2 {
-        width: 450px;
-        height: 450px;
+        width: 250px; height: 250px;
         background: #7f00ff;
-        bottom: -150px;
-        right: -100px;
+        bottom: -50px; right: -50px;
         animation: drift 14s infinite alternate-reverse ease-in-out;
       }
 
       .glow-orb-3 {
-        width: 350px;
-        height: 350px;
+        width: 200px; height: 200px;
         background: #0072ff;
-        top: 40%;
-        left: 40%;
+        top: 40%; left: 40%;
         opacity: 0.25;
         animation: drift 10s infinite alternate ease-in-out;
       }
 
       @keyframes drift {
-        0% {
-          transform: translate(0, 0) scale(1);
-        }
-        100% {
-          transform: translate(40px, -40px) scale(1.05);
-        }
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(20px, -20px) scale(1.05); }
       }
 
-      /* เลย์เอาต์ใหม่: จัดเรียงแนวตั้ง กึ่งกลางทั้งหมด */
+      /* เลย์เอาต์หลัก */
       .main-wrapper {
         position: relative;
         z-index: 1;
         width: 100%;
+        max-width: 500px; /* ล็อคขนาดสูงสุดไว้ */
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 35px; /* ระยะห่างระหว่างหัวข้อและกล่องการ์ด */
+        /* ระยะห่างมือถือ */
+        gap: 25px; 
       }
 
       .text-section {
@@ -127,10 +103,10 @@
         text-align: center;
       }
 
-      /* --- ไอคอนจรวดขยับได้ --- */
+      /* ไอคอนและข้อความ (ค่าเริ่มต้นมือถือ) */
       .title-icon {
-        font-size: 60px;
-        margin-bottom: 15px;
+        font-size: 45px;
+        margin-bottom: 10px;
         display: inline-block;
         background: var(--theme-gradient);
         -webkit-background-clip: text;
@@ -140,55 +116,48 @@
       }
 
       @keyframes flyingPlane {
-        0% {
-          transform: translateY(0px) translateX(0px) rotate(0deg);
-        }
-        50% {
-          transform: translateY(-8px) translateX(5px) rotate(8deg);
-        }
-        100% {
-          transform: translateY(0px) translateX(0px) rotate(0deg);
-        }
+        0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        50% { transform: translateY(-5px) translateX(3px) rotate(5deg); }
+        100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
       }
 
       .title {
-        font-size: clamp(32px, 5vw, 42px);
+        font-size: 26px;
         font-weight: 700;
         white-space: nowrap;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         background: var(--theme-gradient);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
 
-      /* กล่องการ์ดติดต่อ */
+      /* กล่องการ์ด (ค่าเริ่มต้นมือถือ) */
       .contact-container {
         background: var(--glass-bg);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        border-radius: 32px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 24px;
         border: 1px solid var(--glass-border);
-        padding: 40px;
         width: 100%;
-        max-width: 500px; /* บีบขนาดกล่องไม่ให้กว้างเกินไปเมื่ออยู่ตรงกลาง */
-        box-shadow: 0 30px 60px rgba(0, 114, 255, 0.05);
+        padding: 25px 20px;
+        box-shadow: 0 20px 40px rgba(0, 114, 255, 0.05);
         perspective: 1000px;
       }
 
       .social-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
       }
 
       .social-card {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px 25px;
+        justify-content: center; /* เปลี่ยนเป็นกึ่งกลาง */
+        gap: 15px;
+        padding: 15px;
         text-decoration: none;
-        border-radius: 20px;
+        border-radius: 16px;
         background: rgba(255, 255, 255, 0.6);
         border: 1px solid rgba(255, 255, 255, 0.8);
         transition: all 0.3s ease;
@@ -196,111 +165,118 @@
         transform-style: preserve-3d;
         will-change: transform;
         cursor: pointer;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
       }
 
       .social-card:hover {
         background: #ffffff;
-        box-shadow: 0 15px 35px rgba(0, 114, 255, 0.08);
-        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 114, 255, 0.08);
+        transform: translateY(-2px);
         border-color: rgba(0, 114, 255, 0.2);
       }
 
       .icon-box {
-        width: 60px;
-        height: 60px;
-        border-radius: 16px;
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 28px;
+        font-size: 22px;
         background: var(--icon-bg);
         color: var(--text-main);
         transition: all 0.3s ease;
-        transform: translateZ(25px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        transform: translateZ(15px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+        flex-shrink: 0; /* ป้องกันไอคอนบีบตัวในจอมือถือเล็กๆ */
       }
 
       .info-box {
-        text-align: center;
+        text-align: left; /* ในมือถือจัดซ้ายเล็กน้อยเพื่อให้อ่านง่ายและไม่ล้นจอ */
         display: flex;
         flex-direction: column;
-        align-items: center;
-        transform: translateZ(15px);
-        min-width: 170px;
+        justify-content: center;
+        transform: translateZ(10px);
+        flex: 1; /* ให้เนื้อหาขยายเต็มพื้นที่ที่เหลือ */
+        overflow: hidden; /* ป้องกันข้อความยาวทะลุกรอบ */
       }
 
       .platform-name {
         color: var(--text-main);
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 600;
         margin-bottom: 2px;
       }
 
       .username {
-        font-size: 15px;
+        font-size: 13px;
         color: var(--text-muted);
         font-weight: 400;
         display: flex;
         align-items: center;
         gap: 6px;
+        white-space: nowrap;
+        text-overflow: ellipsis; /* ถ้าชื่อยาวเกินจอจะใส่ ... อัตโนมัติ */
+        overflow: hidden;
       }
 
-      .card-facebook:hover .icon-box {
-        background-color: var(--fb-color);
-        box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
-        color: #fff;
-      }
-      .card-instagram:hover .icon-box {
-        background: var(--ig-gradient);
-        box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3);
-        color: #fff;
-      }
-      .card-tiktok:hover .icon-box {
-        background-color: var(--tiktok-color);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        color: #fff;
-      }
-      .card-line:hover .icon-box {
-        background-color: var(--line-color);
-        box-shadow: 0 8px 20px rgba(0, 195, 0, 0.3);
-        color: #fff;
-      }
+      /* สีแบรนด์ตอนชี้เมาส์ (Hover) */
+      .card-facebook:hover .icon-box { background-color: var(--fb-color); color: #fff; }
+      .card-instagram:hover .icon-box { background: var(--ig-gradient); color: #fff; }
+      .card-tiktok:hover .icon-box { background-color: var(--tiktok-color); color: #fff; }
+      .card-line:hover .icon-box { background-color: var(--line-color); color: #fff; }
+      .copy-success .username { color: var(--line-color) !important; font-weight: 600; }
+      .copy-success .icon-box { background-color: var(--line-color); color: #fff; }
 
-      .copy-success .username {
-        color: var(--line-color) !important;
-        font-weight: 600;
-      }
-      .copy-success .icon-box {
-        background-color: var(--line-color);
-        color: #fff;
-      }
-
-      /* Responsive สำหรับมือถือ */
-      @media (max-width: 480px) {
-        .contact-container {
-          padding: 30px 20px;
+      /* =======================================================
+         หน้าจอ Tablet และ Desktop (ขยายขนาดขึ้นเมื่อจอใหญ่กว่า 600px)
+         ======================================================= */
+      @media (min-width: 600px) {
+        body {
+          padding: 40px 20px;
         }
-        .title {
-          font-size: 28px;
-        }
-        .social-card {
-          padding: 18px;
-          gap: 15px;
-        }
-        .icon-box {
-          width: 50px;
-          height: 50px;
-          font-size: 24px;
-        }
-        .platform-name {
-          font-size: 18px;
-        }
-        .username {
-          font-size: 13px;
+        .glow-orb-1 { width: 500px; height: 500px; filter: blur(100px); }
+        .glow-orb-2 { width: 450px; height: 450px; filter: blur(100px); }
+        .glow-orb-3 { width: 350px; height: 350px; filter: blur(100px); }
+        
+        .main-wrapper {
+          gap: 35px;
         }
         .title-icon {
-          font-size: 50px;
+          font-size: 60px;
+          margin-bottom: 15px;
+        }
+        .title {
+          font-size: 38px;
+          letter-spacing: 2px;
+        }
+        .contact-container {
+          padding: 40px;
+          border-radius: 32px;
+        }
+        .social-grid {
+          gap: 16px;
+        }
+        .social-card {
+          padding: 20px 25px;
+          gap: 20px;
+          border-radius: 20px;
+        }
+        .icon-box {
+          width: 60px;
+          height: 60px;
+          font-size: 28px;
+          border-radius: 16px;
+        }
+        .info-box {
+          text-align: center;
+          align-items: center; /* บนจอใหญ่จัดให้อยู่ตรงกลางได้สวยงาม */
+        }
+        .platform-name {
+          font-size: 20px;
+        }
+        .username {
+          font-size: 15px;
         }
       }
     </style>
@@ -311,15 +287,16 @@
     <div class="glow-orb-3"></div>
 
     <div class="main-wrapper">
-      <!-- ส่วนหัว: ไอคอนจรวดและข้อความถูกย้ายมาอยู่ตรงกลางด้านบน -->
+      <!-- ส่วนหัว -->
       <div class="text-section">
         <i class="fa-solid fa-paper-plane title-icon"></i>
         <h1 class="title">ช่องทางติดต่อ</h1>
       </div>
 
-      <!-- ส่วนการ์ดติดต่อ: อยู่ตรงกลางด้านล่างส่วนหัว -->
+      <!-- ส่วนการ์ดติดต่อ -->
       <div class="contact-container">
         <div class="social-grid">
+          
           <a href="https://www.facebook.com/share/1BCEvcqLb7/" class="social-card card-facebook" target="_blank">
             <div class="icon-box"><i class="fa-brands fa-facebook-f"></i></div>
             <div class="info-box">
@@ -344,11 +321,7 @@
             </div>
           </a>
 
-          <div
-            class="social-card card-line"
-            id="copyLineBtn"
-            data-line-id="jumdo_11234"
-          >
+          <div class="social-card card-line" id="copyLineBtn" data-line-id="jumdo_11234">
             <div class="icon-box"><i class="fa-brands fa-line"></i></div>
             <div class="info-box">
               <div class="platform-name">LINE Official</div>
@@ -357,6 +330,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
