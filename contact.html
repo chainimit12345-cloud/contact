@@ -2,15 +2,16 @@
 <html lang="th">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>ข้อมูลติดเพิ่มเติม</title>
+    <!-- ยกเลิกคำสั่งล็อคการซูมออก กลับมาใช้แบบมาตรฐาน -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ข้อมูลติดต่อเพิ่มเติม</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
       :root {
-        /* โทนสี Ocean Aurora */
+        /* โทนสี Ocean Aurora (ฟ้าคราม - น้ำเงิน - ม่วง) */
         --bg-color: #f3f8ff;
         --glass-bg: rgba(255, 255, 255, 0.75);
         --glass-border: rgba(255, 255, 255, 1);
@@ -33,30 +34,34 @@
         font-family: "Kanit", sans-serif;
       }
 
+      /* ---------------------------------------------------
+         MOBILE FIRST BASE STYLES (ค่าเริ่มต้นสำหรับมือถือทุกรุ่น)
+         --------------------------------------------------- */
       body {
         background-color: var(--bg-color);
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        /* ค่าเริ่มต้นสำหรับมือถือ: ลด Padding */
-        padding: 20px 15px; 
-        overflow-x: hidden;
+        padding: 20px 15px; /* ลด Padding ในมือถือ */
+        overflow-x: hidden; /* ป้องกันหน้าจอเลื่อนซ้ายขวา */
         position: relative;
-        -webkit-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
       }
 
-      /* กราฟิกแสงออร่า */
-      .glow-orb-1, .glow-orb-2, .glow-orb-3 {
+      /* กราฟิกแสงออร่า (ลดขนาดในมือถือเพื่อไม่ให้เครื่องหน่วงและล้น) */
+      .glow-orb-1,
+      .glow-orb-2,
+      .glow-orb-3 {
         position: absolute;
         border-radius: 50%;
-        filter: blur(80px); /* ลดความเบลอในมือถือให้เครื่องไม่หน่วง */
+        filter: blur(80px);
         z-index: 0;
         opacity: 0.5;
       }
 
       .glow-orb-1 {
-        width: 300px; height: 300px; /* ย่อขนาดออร่าในมือถือ */
+        width: 300px; height: 300px;
         background: #00c6ff;
         top: -50px; left: -50px;
         animation: drift 12s infinite alternate ease-in-out;
@@ -72,7 +77,7 @@
       .glow-orb-3 {
         width: 200px; height: 200px;
         background: #0072ff;
-        top: 40%; left: 40%;
+        top: 30%; left: 30%;
         opacity: 0.25;
         animation: drift 10s infinite alternate ease-in-out;
       }
@@ -87,12 +92,11 @@
         position: relative;
         z-index: 1;
         width: 100%;
-        max-width: 500px; /* ล็อคขนาดสูงสุดไว้ */
+        max-width: 500px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* ระยะห่างมือถือ */
-        gap: 25px; 
+        gap: 25px; /* ระยะห่างในมือถือ */
       }
 
       .text-section {
@@ -103,26 +107,27 @@
         text-align: center;
       }
 
-      /* ไอคอนและข้อความ (ค่าเริ่มต้นมือถือ) */
+      /* ไอคอนจรวด */
       .title-icon {
-        font-size: 45px;
+        font-size: 50px; /* ขนาดย่อลงสำหรับมือถือ */
         margin-bottom: 10px;
         display: inline-block;
         background: var(--theme-gradient);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 10px 15px rgba(0, 114, 255, 0.3));
+        filter: drop-shadow(0 8px 12px rgba(0, 114, 255, 0.3));
         animation: flyingPlane 3s ease-in-out infinite;
       }
 
       @keyframes flyingPlane {
         0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-        50% { transform: translateY(-5px) translateX(3px) rotate(5deg); }
+        50% { transform: translateY(-6px) translateX(4px) rotate(6deg); }
         100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
       }
 
       .title {
-        font-size: 26px;
+        /* ใช้ clamp ให้ฟอนต์ปรับขนาดอัตโนมัติตามหน้าจอ (เล็กสุด 26px, ใหญ่สุด 42px) */
+        font-size: clamp(26px, 6vw, 42px);
         font-weight: 700;
         white-space: nowrap;
         letter-spacing: 1px;
@@ -131,15 +136,15 @@
         -webkit-text-fill-color: transparent;
       }
 
-      /* กล่องการ์ด (ค่าเริ่มต้นมือถือ) */
+      /* กล่องการ์ดติดต่อ */
       .contact-container {
         background: var(--glass-bg);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 24px;
         border: 1px solid var(--glass-border);
+        padding: 25px 20px; /* ลด padding ในมือถือ */
         width: 100%;
-        padding: 25px 20px;
         box-shadow: 0 20px 40px rgba(0, 114, 255, 0.05);
         perspective: 1000px;
       }
@@ -153,8 +158,8 @@
       .social-card {
         display: flex;
         align-items: center;
-        justify-content: center; /* เปลี่ยนเป็นกึ่งกลาง */
-        gap: 15px;
+        justify-content: center;
+        gap: 15px; /* ระยะห่างระหว่างไอคอนกับข้อความ */
         padding: 15px;
         text-decoration: none;
         border-radius: 16px;
@@ -176,36 +181,37 @@
       }
 
       .icon-box {
-        width: 45px;
-        height: 45px;
-        border-radius: 12px;
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 22px;
+        font-size: 24px;
         background: var(--icon-bg);
         color: var(--text-main);
         transition: all 0.3s ease;
         transform: translateZ(15px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-        flex-shrink: 0; /* ป้องกันไอคอนบีบตัวในจอมือถือเล็กๆ */
+        flex-shrink: 0; /* ป้องกันไอคอนบีบเบี้ยวในจอเล็ก */
       }
 
       .info-box {
-        text-align: left; /* ในมือถือจัดซ้ายเล็กน้อยเพื่อให้อ่านง่ายและไม่ล้นจอ */
+        text-align: left;
         display: flex;
         flex-direction: column;
         justify-content: center;
         transform: translateZ(10px);
-        flex: 1; /* ให้เนื้อหาขยายเต็มพื้นที่ที่เหลือ */
-        overflow: hidden; /* ป้องกันข้อความยาวทะลุกรอบ */
+        flex: 1; /* ให้กล่องข้อความขยายเต็มพื้นที่ที่เหลือ */
+        min-width: 0; /* ป้องกันข้อความดันกล่องล้น */
       }
 
       .platform-name {
         color: var(--text-main);
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 600;
         margin-bottom: 2px;
+        white-space: nowrap;
       }
 
       .username {
@@ -215,66 +221,82 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        /* ป้องกันข้อความยาวทะลุจอ ถ้าจอเล็กเกินมันจะขึ้น ... */
         white-space: nowrap;
-        text-overflow: ellipsis; /* ถ้าชื่อยาวเกินจอจะใส่ ... อัตโนมัติ */
         overflow: hidden;
+        text-overflow: ellipsis;
       }
 
-      /* สีแบรนด์ตอนชี้เมาส์ (Hover) */
-      .card-facebook:hover .icon-box { background-color: var(--fb-color); color: #fff; }
-      .card-instagram:hover .icon-box { background: var(--ig-gradient); color: #fff; }
-      .card-tiktok:hover .icon-box { background-color: var(--tiktok-color); color: #fff; }
-      .card-line:hover .icon-box { background-color: var(--line-color); color: #fff; }
+      /* Hover Effects ของแพลตฟอร์มต่างๆ */
+      .card-facebook:hover .icon-box { background-color: var(--fb-color); box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3); color: #fff; }
+      .card-instagram:hover .icon-box { background: var(--ig-gradient); box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3); color: #fff; }
+      .card-tiktok:hover .icon-box { background-color: var(--tiktok-color); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); color: #fff; }
+      .card-line:hover .icon-box { background-color: var(--line-color); box-shadow: 0 8px 20px rgba(0, 195, 0, 0.3); color: #fff; }
+
       .copy-success .username { color: var(--line-color) !important; font-weight: 600; }
       .copy-success .icon-box { background-color: var(--line-color); color: #fff; }
 
-      /* =======================================================
-         หน้าจอ Tablet และ Desktop (ขยายขนาดขึ้นเมื่อจอใหญ่กว่า 600px)
-         ======================================================= */
+      /* ---------------------------------------------------
+         TABLET & DESKTOP (ขยายขนาดขึ้นเมื่อจอใหญ่กว่า 600px)
+         --------------------------------------------------- */
       @media (min-width: 600px) {
         body {
           padding: 40px 20px;
         }
-        .glow-orb-1 { width: 500px; height: 500px; filter: blur(100px); }
-        .glow-orb-2 { width: 450px; height: 450px; filter: blur(100px); }
-        .glow-orb-3 { width: 350px; height: 350px; filter: blur(100px); }
-        
+
+        /* ขยายแสงออร่ากลับมาขนาดเดิม */
+        .glow-orb-1 { width: 500px; height: 500px; filter: blur(100px); top: -100px; left: -150px; }
+        .glow-orb-2 { width: 450px; height: 450px; filter: blur(100px); bottom: -150px; right: -100px; }
+        .glow-orb-3 { width: 350px; height: 350px; filter: blur(100px); top: 40%; left: 40%; }
+
         .main-wrapper {
           gap: 35px;
         }
+
         .title-icon {
           font-size: 60px;
           margin-bottom: 15px;
         }
+
         .title {
-          font-size: 38px;
           letter-spacing: 2px;
         }
+
         .contact-container {
           padding: 40px;
           border-radius: 32px;
         }
+
         .social-grid {
           gap: 16px;
         }
+
         .social-card {
           padding: 20px 25px;
           gap: 20px;
           border-radius: 20px;
         }
+
+        .social-card:hover {
+          transform: translateY(-4px);
+        }
+
         .icon-box {
           width: 60px;
           height: 60px;
           font-size: 28px;
           border-radius: 16px;
         }
+
         .info-box {
           text-align: center;
-          align-items: center; /* บนจอใหญ่จัดให้อยู่ตรงกลางได้สวยงาม */
+          align-items: center; /* บนจอใหญ่จับให้อยู่กึ่งกลางได้สวยงามกว่า */
         }
+
         .platform-name {
           font-size: 20px;
         }
+
         .username {
           font-size: 15px;
         }
@@ -335,6 +357,7 @@
       </div>
     </div>
 
+    <!-- ลิงก์ไฟล์ contact.js เหมือนเดิม -->
     <script src="contact.js"></script>
   </body>
 </html>
