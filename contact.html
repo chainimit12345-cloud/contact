@@ -2,16 +2,21 @@
 <html lang="th">
   <head>
     <meta charset="UTF-8" />
-    <!-- ยกเลิกคำสั่งล็อคการซูมออก กลับมาใช้แบบมาตรฐาน -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ข้อมูลติดต่อเพิ่มเติม</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
     <style>
       :root {
-        /* โทนสี Ocean Aurora (ฟ้าคราม - น้ำเงิน - ม่วง) */
+        /* โทนสี Ocean Aurora */
         --bg-color: #f3f8ff;
         --glass-bg: rgba(255, 255, 255, 0.75);
         --glass-border: rgba(255, 255, 255, 1);
@@ -34,50 +39,70 @@
         font-family: "Kanit", sans-serif;
       }
 
-      /* ---------------------------------------------------
-         MOBILE FIRST BASE STYLES (ค่าเริ่มต้นสำหรับมือถือทุกรุ่น)
-         --------------------------------------------------- */
+      /* เติมสีพื้นหลังให้รากของเว็บ ป้องกันขอบขาวเวลาซูมออก */
+      html {
+        background-color: var(--bg-color);
+        width: 100%;
+        height: 100%;
+      }
+
       body {
         background-color: var(--bg-color);
         min-height: 100vh;
+        min-height: 100dvh; /* ใช้ 100dvh เพื่อแก้ปัญหาแถบ URL ในมือถือบังสัดส่วนจอ */
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px 15px; /* ลด Padding ในมือถือ */
-        overflow-x: hidden; /* ป้องกันหน้าจอเลื่อนซ้ายขวา */
+        padding: 20px 15px;
         position: relative;
-        -webkit-font-smoothing: antialiased;
+        /* ลบ overflow-x: hidden ออก เพื่อให้การซูมทำงานเป็นธรรมชาติ */
       }
 
-      /* กราฟิกแสงออร่า (ลดขนาดในมือถือเพื่อไม่ให้เครื่องหน่วงและล้น) */
+      /* สร้างกล่องแยกสำหรับแสงออร่า ล็อคติดจอและตัดขอบที่ล้นออก */
+      .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+        pointer-events: none; /* ป้องกันไม่ให้ไปบังการคลิกปุ่ม */
+      }
+
       .glow-orb-1,
       .glow-orb-2,
       .glow-orb-3 {
         position: absolute;
         border-radius: 50%;
         filter: blur(80px);
-        z-index: 0;
         opacity: 0.5;
       }
 
       .glow-orb-1 {
-        width: 300px; height: 300px;
+        width: 300px;
+        height: 300px;
         background: #00c6ff;
-        top: -50px; left: -50px;
+        top: -50px;
+        left: -50px;
         animation: drift 12s infinite alternate ease-in-out;
       }
 
       .glow-orb-2 {
-        width: 250px; height: 250px;
+        width: 250px;
+        height: 250px;
         background: #7f00ff;
-        bottom: -50px; right: -50px;
+        bottom: -50px;
+        right: -50px;
         animation: drift 14s infinite alternate-reverse ease-in-out;
       }
 
       .glow-orb-3 {
-        width: 200px; height: 200px;
+        width: 200px;
+        height: 200px;
         background: #0072ff;
-        top: 30%; left: 30%;
+        top: 30%;
+        left: 30%;
         opacity: 0.25;
         animation: drift 10s infinite alternate ease-in-out;
       }
@@ -87,7 +112,6 @@
         100% { transform: translate(20px, -20px) scale(1.05); }
       }
 
-      /* เลย์เอาต์หลัก */
       .main-wrapper {
         position: relative;
         z-index: 1;
@@ -96,7 +120,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 25px; /* ระยะห่างในมือถือ */
+        gap: 25px;
       }
 
       .text-section {
@@ -107,9 +131,8 @@
         text-align: center;
       }
 
-      /* ไอคอนจรวด */
       .title-icon {
-        font-size: 50px; /* ขนาดย่อลงสำหรับมือถือ */
+        font-size: 50px;
         margin-bottom: 10px;
         display: inline-block;
         background: var(--theme-gradient);
@@ -126,7 +149,6 @@
       }
 
       .title {
-        /* ใช้ clamp ให้ฟอนต์ปรับขนาดอัตโนมัติตามหน้าจอ (เล็กสุด 26px, ใหญ่สุด 42px) */
         font-size: clamp(26px, 6vw, 42px);
         font-weight: 700;
         white-space: nowrap;
@@ -136,14 +158,13 @@
         -webkit-text-fill-color: transparent;
       }
 
-      /* กล่องการ์ดติดต่อ */
       .contact-container {
         background: var(--glass-bg);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 24px;
         border: 1px solid var(--glass-border);
-        padding: 25px 20px; /* ลด padding ในมือถือ */
+        padding: 25px 20px;
         width: 100%;
         box-shadow: 0 20px 40px rgba(0, 114, 255, 0.05);
         perspective: 1000px;
@@ -159,7 +180,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 15px; /* ระยะห่างระหว่างไอคอนกับข้อความ */
+        gap: 15px;
         padding: 15px;
         text-decoration: none;
         border-radius: 16px;
@@ -193,7 +214,7 @@
         transition: all 0.3s ease;
         transform: translateZ(15px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-        flex-shrink: 0; /* ป้องกันไอคอนบีบเบี้ยวในจอเล็ก */
+        flex-shrink: 0;
       }
 
       .info-box {
@@ -202,8 +223,8 @@
         flex-direction: column;
         justify-content: center;
         transform: translateZ(10px);
-        flex: 1; /* ให้กล่องข้อความขยายเต็มพื้นที่ที่เหลือ */
-        min-width: 0; /* ป้องกันข้อความดันกล่องล้น */
+        flex: 1;
+        min-width: 0;
       }
 
       .platform-name {
@@ -221,13 +242,11 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        /* ป้องกันข้อความยาวทะลุจอ ถ้าจอเล็กเกินมันจะขึ้น ... */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      /* Hover Effects ของแพลตฟอร์มต่างๆ */
       .card-facebook:hover .icon-box { background-color: var(--fb-color); box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3); color: #fff; }
       .card-instagram:hover .icon-box { background: var(--ig-gradient); box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3); color: #fff; }
       .card-tiktok:hover .icon-box { background-color: var(--tiktok-color); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); color: #fff; }
@@ -236,89 +255,42 @@
       .copy-success .username { color: var(--line-color) !important; font-weight: 600; }
       .copy-success .icon-box { background-color: var(--line-color); color: #fff; }
 
-      /* ---------------------------------------------------
-         TABLET & DESKTOP (ขยายขนาดขึ้นเมื่อจอใหญ่กว่า 600px)
-         --------------------------------------------------- */
+      /* ขยายขนาดกลับเมื่อเป็น Tablet / Desktop */
       @media (min-width: 600px) {
-        body {
-          padding: 40px 20px;
-        }
-
-        /* ขยายแสงออร่ากลับมาขนาดเดิม */
+        body { padding: 40px 20px; }
         .glow-orb-1 { width: 500px; height: 500px; filter: blur(100px); top: -100px; left: -150px; }
         .glow-orb-2 { width: 450px; height: 450px; filter: blur(100px); bottom: -150px; right: -100px; }
         .glow-orb-3 { width: 350px; height: 350px; filter: blur(100px); top: 40%; left: 40%; }
-
-        .main-wrapper {
-          gap: 35px;
-        }
-
-        .title-icon {
-          font-size: 60px;
-          margin-bottom: 15px;
-        }
-
-        .title {
-          letter-spacing: 2px;
-        }
-
-        .contact-container {
-          padding: 40px;
-          border-radius: 32px;
-        }
-
-        .social-grid {
-          gap: 16px;
-        }
-
-        .social-card {
-          padding: 20px 25px;
-          gap: 20px;
-          border-radius: 20px;
-        }
-
-        .social-card:hover {
-          transform: translateY(-4px);
-        }
-
-        .icon-box {
-          width: 60px;
-          height: 60px;
-          font-size: 28px;
-          border-radius: 16px;
-        }
-
-        .info-box {
-          text-align: center;
-          align-items: center; /* บนจอใหญ่จับให้อยู่กึ่งกลางได้สวยงามกว่า */
-        }
-
-        .platform-name {
-          font-size: 20px;
-        }
-
-        .username {
-          font-size: 15px;
-        }
+        .main-wrapper { gap: 35px; }
+        .title-icon { font-size: 60px; margin-bottom: 15px; }
+        .title { letter-spacing: 2px; }
+        .contact-container { padding: 40px; border-radius: 32px; }
+        .social-grid { gap: 16px; }
+        .social-card { padding: 20px 25px; gap: 20px; border-radius: 20px; }
+        .social-card:hover { transform: translateY(-4px); }
+        .icon-box { width: 60px; height: 60px; font-size: 28px; border-radius: 16px; }
+        .info-box { text-align: center; align-items: center; }
+        .platform-name { font-size: 20px; }
+        .username { font-size: 15px; }
       }
     </style>
   </head>
   <body>
-    <div class="glow-orb-1"></div>
-    <div class="glow-orb-2"></div>
-    <div class="glow-orb-3"></div>
+    
+    <div class="bg-animation">
+      <div class="glow-orb-1"></div>
+      <div class="glow-orb-2"></div>
+      <div class="glow-orb-3"></div>
+    </div>
 
     <div class="main-wrapper">
-      <!-- ส่วนหัว -->
       <div class="text-section">
         <i class="fa-solid fa-paper-plane title-icon"></i>
         <h1 class="title">ช่องทางติดต่อ</h1>
       </div>
 
-      <!-- ส่วนการ์ดติดต่อ -->
       <div class="contact-container">
         <div class="social-grid">
-          
           <a href="https://www.facebook.com/share/1BCEvcqLb7/" class="social-card card-facebook" target="_blank">
             <div class="icon-box"><i class="fa-brands fa-facebook-f"></i></div>
             <div class="info-box">
@@ -352,12 +324,10 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
 
-    <!-- ลิงก์ไฟล์ contact.js เหมือนเดิม -->
     <script src="contact.js"></script>
   </body>
 </html>
