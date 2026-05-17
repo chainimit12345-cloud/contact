@@ -16,7 +16,6 @@
 
     <style>
       :root {
-        /* โทนสี Ocean Aurora */
         --bg-color: #f3f8ff;
         --glass-bg: rgba(255, 255, 255, 0.75);
         --glass-border: rgba(255, 255, 255, 1);
@@ -25,11 +24,19 @@
         --theme-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
         --icon-bg: #ffffff;
 
-        /* สีแบรนด์ Social Media */
         --fb-color: #1877f2;
-        --ig-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        --ig-gradient: linear-gradient(
+          45deg,
+          #f09433,
+          #e6683c,
+          #dc2743,
+          #cc2366,
+          #bc1888
+        );
         --tiktok-color: #0f172a;
         --line-color: #00c300;
+        --phone-color: #0ea5e9;
+        --email-color: #f43f5e;
       }
 
       * {
@@ -39,7 +46,6 @@
         font-family: "Kanit", sans-serif;
       }
 
-      /* เติมสีพื้นหลังให้รากของเว็บ ป้องกันขอบขาวเวลาซูมออก */
       html {
         background-color: var(--bg-color);
         width: 100%;
@@ -49,16 +55,15 @@
       body {
         background-color: var(--bg-color);
         min-height: 100vh;
-        min-height: 100dvh; /* ใช้ 100dvh เพื่อแก้ปัญหาแถบ URL ในมือถือบังสัดส่วนจอ */
+        min-height: 100dvh;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 20px 15px;
         position: relative;
-        /* ลบ overflow-x: hidden ออก เพื่อให้การซูมทำงานเป็นธรรมชาติ */
+        -webkit-font-smoothing: antialiased;
       }
 
-      /* สร้างกล่องแยกสำหรับแสงออร่า ล็อคติดจอและตัดขอบที่ล้นออก */
       .bg-animation {
         position: fixed;
         top: 0;
@@ -67,7 +72,7 @@
         height: 100%;
         overflow: hidden;
         z-index: 0;
-        pointer-events: none; /* ป้องกันไม่ให้ไปบังการคลิกปุ่ม */
+        pointer-events: none;
       }
 
       .glow-orb-1,
@@ -87,7 +92,6 @@
         left: -50px;
         animation: drift 12s infinite alternate ease-in-out;
       }
-
       .glow-orb-2 {
         width: 250px;
         height: 250px;
@@ -96,7 +100,6 @@
         right: -50px;
         animation: drift 14s infinite alternate-reverse ease-in-out;
       }
-
       .glow-orb-3 {
         width: 200px;
         height: 200px;
@@ -108,8 +111,12 @@
       }
 
       @keyframes drift {
-        0% { transform: translate(0, 0) scale(1); }
-        100% { transform: translate(20px, -20px) scale(1.05); }
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(20px, -20px) scale(1.05);
+        }
       }
 
       .main-wrapper {
@@ -121,13 +128,13 @@
         flex-direction: column;
         align-items: center;
         gap: 25px;
+        margin: 40px 0;
       }
 
       .text-section {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         text-align: center;
       }
 
@@ -143,9 +150,15 @@
       }
 
       @keyframes flyingPlane {
-        0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-        50% { transform: translateY(-6px) translateX(4px) rotate(6deg); }
-        100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        0% {
+          transform: translateY(0px) translateX(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-6px) translateX(4px) rotate(6deg);
+        }
+        100% {
+          transform: translateY(0px) translateX(0px) rotate(0deg);
+        }
       }
 
       .title {
@@ -175,6 +188,12 @@
         grid-template-columns: 1fr;
         gap: 12px;
       }
+      .split-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 12px;
+      }
 
       .social-card {
         display: flex;
@@ -189,7 +208,6 @@
         transition: all 0.3s ease;
         position: relative;
         transform-style: preserve-3d;
-        will-change: transform;
         cursor: pointer;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
       }
@@ -198,7 +216,30 @@
         background: #ffffff;
         box-shadow: 0 10px 25px rgba(0, 114, 255, 0.08);
         transform: translateY(-2px);
-        border-color: rgba(0, 114, 255, 0.2);
+      }
+
+      .social-card.split-card {
+        flex-direction: column;
+        gap: 8px;
+        padding: 15px 10px;
+      }
+      .social-card.split-card .info-box {
+        align-items: center;
+        text-align: center;
+      }
+      .social-card.split-card .platform-name {
+        font-size: 15px;
+      }
+      .social-card.split-card .username {
+        font-size: 12px;
+        justify-content: center;
+        width: 100%;
+        color: var(--text-main);
+      }
+      .social-card.split-card .icon-box {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
       }
 
       .icon-box {
@@ -234,7 +275,6 @@
         margin-bottom: 2px;
         white-space: nowrap;
       }
-
       .username {
         font-size: 13px;
         color: var(--text-muted);
@@ -247,36 +287,341 @@
         text-overflow: ellipsis;
       }
 
-      .card-facebook:hover .icon-box { background-color: var(--fb-color); box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3); color: #fff; }
-      .card-instagram:hover .icon-box { background: var(--ig-gradient); box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3); color: #fff; }
-      .card-tiktok:hover .icon-box { background-color: var(--tiktok-color); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); color: #fff; }
-      .card-line:hover .icon-box { background-color: var(--line-color); box-shadow: 0 8px 20px rgba(0, 195, 0, 0.3); color: #fff; }
+      /* =========================================
+         🌟 เอฟเฟกต์ตัวหนังสือปล่อยคลื่น (Text Wave Animation) 🌟
+         ========================================= */
+      .wave-text {
+        position: relative;
+        display: inline-block;
+        font-weight: 500;
+        z-index: 1;
+      }
 
-      .copy-success .username { color: var(--line-color) !important; font-weight: 600; }
-      .copy-success .icon-box { background-color: var(--line-color); color: #fff; }
+      .wave-phone {
+        color: var(--phone-color);
+      }
+      .wave-email {
+        color: var(--email-color);
+      }
 
-      /* ขยายขนาดกลับเมื่อเป็น Tablet / Desktop */
+      /* สร้างคลื่นซ้อน 2 ชั้นด้วย ::before และ ::after */
+      .wave-text::before,
+      .wave-text::after {
+        content: attr(data-text); /* ดึงข้อความจาก HTML มาทำเป็นคลื่น */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* แอนิเมชันสำหรับเบอร์โทร */
+      .wave-phone::before {
+        animation: textRipplePhone 2.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          infinite;
+      }
+      .wave-phone::after {
+        animation: textRipplePhone 2.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          infinite 1.25s;
+      }
+
+      @keyframes textRipplePhone {
+        0% {
+          transform: scale(1);
+          opacity: 0.7;
+          color: var(--phone-color);
+          filter: blur(0px);
+        }
+        100% {
+          transform: scale(1.3);
+          opacity: 0;
+          color: var(--phone-color);
+          filter: blur(2px);
+        }
+      }
+
+      /* แอนิเมชันสำหรับอีเมล */
+      .wave-email::before {
+        animation: textRippleEmail 2.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          infinite;
+      }
+      .wave-email::after {
+        animation: textRippleEmail 2.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          infinite 1.25s;
+      }
+
+      @keyframes textRippleEmail {
+        0% {
+          transform: scale(1);
+          opacity: 0.7;
+          color: var(--email-color);
+          filter: blur(0px);
+        }
+        100% {
+          transform: scale(1.3);
+          opacity: 0;
+          color: var(--email-color);
+          filter: blur(2px);
+        }
+      }
+
+      /* Hover Effects หน้าหลัก */
+      .card-facebook:hover .icon-box {
+        background-color: var(--fb-color);
+        color: #fff;
+      }
+      .card-instagram:hover .icon-box {
+        background: var(--ig-gradient);
+        color: #fff;
+      }
+      .card-tiktok:hover .icon-box {
+        background-color: var(--tiktok-color);
+        color: #fff;
+      }
+      .card-line:hover .icon-box,
+      .copy-success-line .icon-box {
+        background-color: var(--line-color);
+        color: #fff;
+      }
+      .copy-success-line .username {
+        color: var(--line-color) !important;
+        font-weight: 600;
+      }
+
+      .card-phone:hover {
+        border-color: rgba(14, 165, 233, 0.3);
+      }
+      .card-phone:hover .icon-box {
+        background-color: var(--phone-color);
+        color: #fff;
+        box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+      }
+      .card-phone:hover .username,
+      .card-phone:hover .wave-text {
+        color: var(--phone-color);
+      }
+
+      .card-email:hover {
+        border-color: rgba(244, 63, 94, 0.3);
+      }
+      .card-email:hover .icon-box {
+        background-color: var(--email-color);
+        color: #fff;
+        box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
+      }
+      .card-email:hover .username,
+      .card-email:hover .wave-text {
+        color: var(--email-color);
+      }
+
+      /* =========================================
+         MODAL / POPUP STYLES 
+         ========================================= */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-content {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        width: 90%;
+        max-width: 400px;
+        padding: 30px 25px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        transform: translateY(30px) scale(0.95);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      .modal-overlay.active .modal-content {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        border-radius: 50%;
+        font-size: 18px;
+        color: var(--text-main);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.3s ease;
+      }
+      .close-btn:hover {
+        background: #fff;
+        color: #f43f5e;
+      }
+
+      .modal-header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .modal-header h2 {
+        font-size: 22px;
+        margin-bottom: 5px;
+      }
+      .modal-header p {
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .modal-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .modal-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .modal-item:hover {
+        background: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+      .modal-item .icon-box {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        box-shadow: none;
+      }
+      .modal-item .platform-name {
+        font-size: 16px;
+        margin-bottom: 0;
+      }
+      .modal-item .username {
+        font-size: 13px;
+      }
+
+      .modal-phone:hover {
+        border-color: rgba(14, 165, 233, 0.3);
+      }
+      .modal-phone:hover .icon-box,
+      .copy-success-phone .icon-box {
+        background-color: var(--phone-color);
+        color: #fff;
+        border-color: transparent;
+      }
+      .modal-phone.copy-success-phone .username {
+        color: var(--phone-color);
+        font-weight: 600;
+      }
+
+      .modal-email:hover {
+        border-color: rgba(244, 63, 94, 0.3);
+      }
+      .modal-email:hover .icon-box,
+      .copy-success-email .icon-box {
+        background-color: var(--email-color);
+        color: #fff;
+        border-color: transparent;
+      }
+      .modal-email.copy-success-email .username {
+        color: var(--email-color);
+        font-weight: 600;
+      }
+
       @media (min-width: 600px) {
-        body { padding: 40px 20px; }
-        .glow-orb-1 { width: 500px; height: 500px; filter: blur(100px); top: -100px; left: -150px; }
-        .glow-orb-2 { width: 450px; height: 450px; filter: blur(100px); bottom: -150px; right: -100px; }
-        .glow-orb-3 { width: 350px; height: 350px; filter: blur(100px); top: 40%; left: 40%; }
-        .main-wrapper { gap: 35px; }
-        .title-icon { font-size: 60px; margin-bottom: 15px; }
-        .title { letter-spacing: 2px; }
-        .contact-container { padding: 40px; border-radius: 32px; }
-        .social-grid { gap: 16px; }
-        .social-card { padding: 20px 25px; gap: 20px; border-radius: 20px; }
-        .social-card:hover { transform: translateY(-4px); }
-        .icon-box { width: 60px; height: 60px; font-size: 28px; border-radius: 16px; }
-        .info-box { text-align: center; align-items: center; }
-        .platform-name { font-size: 20px; }
-        .username { font-size: 15px; }
+        body {
+          padding: 40px 20px;
+        }
+        .glow-orb-1 {
+          width: 500px;
+          height: 500px;
+          filter: blur(100px);
+          top: -100px;
+          left: -150px;
+        }
+        .glow-orb-2 {
+          width: 450px;
+          height: 450px;
+          filter: blur(100px);
+          bottom: -150px;
+          right: -100px;
+        }
+        .glow-orb-3 {
+          width: 350px;
+          height: 350px;
+          filter: blur(100px);
+          top: 40%;
+          left: 40%;
+        }
+        .main-wrapper {
+          gap: 35px;
+          margin: 0;
+        }
+        .title-icon {
+          font-size: 60px;
+          margin-bottom: 15px;
+        }
+        .contact-container {
+          padding: 40px;
+          border-radius: 32px;
+        }
+        .social-card {
+          padding: 20px 25px;
+          gap: 20px;
+          border-radius: 20px;
+        }
+        .icon-box {
+          width: 60px;
+          height: 60px;
+          font-size: 28px;
+          border-radius: 16px;
+        }
+        .social-card.split-card {
+          padding: 20px 15px;
+          gap: 15px;
+        }
+        .social-card.split-card .icon-box {
+          width: 55px;
+          height: 55px;
+          font-size: 26px;
+        }
       }
     </style>
   </head>
   <body>
-    
     <div class="bg-animation">
       <div class="glow-orb-1"></div>
       <div class="glow-orb-2"></div>
@@ -291,7 +636,11 @@
 
       <div class="contact-container">
         <div class="social-grid">
-          <a href="https://www.facebook.com/share/1BCEvcqLb7/" class="social-card card-facebook" target="_blank">
+          <a
+            href="https://www.facebook.com/share/1BCEvcqLb7/"
+            class="social-card card-facebook"
+            target="_blank"
+          >
             <div class="icon-box"><i class="fa-brands fa-facebook-f"></i></div>
             <div class="info-box">
               <div class="platform-name">Facebook</div>
@@ -299,7 +648,11 @@
             </div>
           </a>
 
-          <a href="https://www.instagram.com/chainimit_nong?igsh=OGQzdGgwbDVjaHp4" class="social-card card-instagram" target="_blank">
+          <a
+            href="https://www.instagram.com/chainimit_nong?igsh=OGQzdGgwbDVjaHp4"
+            class="social-card card-instagram"
+            target="_blank"
+          >
             <div class="icon-box"><i class="fa-brands fa-instagram"></i></div>
             <div class="info-box">
               <div class="platform-name">Instagram</div>
@@ -307,7 +660,11 @@
             </div>
           </a>
 
-          <a href="https://www.tiktok.com/@cw_nong01?is_from_webapp=1&sender_device=pc" class="social-card card-tiktok" target="_blank">
+          <a
+            href="https://www.tiktok.com/@cw_nong01?is_from_webapp=1&sender_device=pc"
+            class="social-card card-tiktok"
+            target="_blank"
+          >
             <div class="icon-box"><i class="fa-brands fa-tiktok"></i></div>
             <div class="info-box">
               <div class="platform-name">TikTok</div>
@@ -315,7 +672,11 @@
             </div>
           </a>
 
-          <div class="social-card card-line" id="copyLineBtn" data-line-id="jumdo_11234">
+          <div
+            class="social-card card-line"
+            id="copyLineBtn"
+            data-copy-text="jumdo_11234"
+          >
             <div class="icon-box"><i class="fa-brands fa-line"></i></div>
             <div class="info-box">
               <div class="platform-name">LINE Official</div>
@@ -325,6 +686,51 @@
             </div>
           </div>
         </div>
+
+        <div class="split-grid">
+          <div class="social-card split-card card-phone" id="openPhoneModalBtn">
+            <div class="icon-box">
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <div class="info-box">
+              <div class="platform-name">Phone</div>
+              <div class="username">
+                <span class="wave-text wave-phone" data-text="แตะดูเบอร์โทร"
+                  >แตะดูเบอร์โทร</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="social-card split-card card-email" id="openEmailModalBtn">
+            <div class="icon-box">
+              <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <div class="info-box">
+              <div class="platform-name">Email</div>
+              <div class="username">
+                <span class="wave-text wave-email" data-text="แตะดูอีเมล"
+                  >แตะดูอีเมล</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="dynamicModal">
+      <div class="modal-content">
+        <button class="close-btn" id="closeModalBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="modal-header">
+          <h2 id="modalTitle">หัวข้อ</h2>
+          <p>แตะที่รายการเพื่อคัดลอก</p>
+        </div>
+
+        <div class="modal-list" id="modalDynamicList"></div>
       </div>
     </div>
 
