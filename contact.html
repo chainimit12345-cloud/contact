@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ข้อมูลติดเพิ่มเติม</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        /* โทนสี Ocean Aurora (ฟ้าคราม - น้ำเงิน - ม่วง) */
+        --bg-color: #f3f8ff;
+        --glass-bg: rgba(255, 255, 255, 0.75);
+        --glass-border: rgba(255, 255, 255, 1);
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --theme-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+        --icon-bg: #ffffff;
+
+        /* สีแบรนด์ Social Media */
+        --fb-color: #1877f2;
+        --ig-gradient: linear-gradient(
+          45deg,
+          #f09433,
+          #e6683c,
+          #dc2743,
+          #cc2366,
+          #bc1888
+        );
+        --tiktok-color: #0f172a;
+        --line-color: #00c300;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Kanit", sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* กราฟิกแสงออร่า */
+      .glow-orb-1,
+      .glow-orb-2,
+      .glow-orb-3 {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        z-index: 0;
+        opacity: 0.5;
+      }
+
+      .glow-orb-1 {
+        width: 500px;
+        height: 500px;
+        background: #00c6ff;
+        top: -100px;
+        left: -150px;
+        animation: drift 12s infinite alternate ease-in-out;
+      }
+
+      .glow-orb-2 {
+        width: 450px;
+        height: 450px;
+        background: #7f00ff;
+        bottom: -150px;
+        right: -100px;
+        animation: drift 14s infinite alternate-reverse ease-in-out;
+      }
+
+      .glow-orb-3 {
+        width: 350px;
+        height: 350px;
+        background: #0072ff;
+        top: 40%;
+        left: 40%;
+        opacity: 0.25;
+        animation: drift 10s infinite alternate ease-in-out;
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(40px, -40px) scale(1.05);
+        }
+      }
+
+      /* เลย์เอาต์ใหม่: จัดเรียงแนวตั้ง กึ่งกลางทั้งหมด */
+      .main-wrapper {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 35px; /* ระยะห่างระหว่างหัวข้อและกล่องการ์ด */
+      }
+
+      .text-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* --- ไอคอนจรวดขยับได้ --- */
+      .title-icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+        display: inline-block;
+        background: var(--theme-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 10px 15px rgba(0, 114, 255, 0.3));
+        animation: flyingPlane 3s ease-in-out infinite;
+      }
+
+      @keyframes flyingPlane {
+        0% {
+          transform: translateY(0px) translateX(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-8px) translateX(5px) rotate(8deg);
+        }
+        100% {
+          transform: translateY(0px) translateX(0px) rotate(0deg);
+        }
+      }
+
+      .title {
+        font-size: clamp(32px, 5vw, 42px);
+        font-weight: 700;
+        white-space: nowrap;
+        letter-spacing: 2px;
+        background: var(--theme-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* กล่องการ์ดติดต่อ */
+      .contact-container {
+        background: var(--glass-bg);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-radius: 32px;
+        border: 1px solid var(--glass-border);
+        padding: 40px;
+        width: 100%;
+        max-width: 500px; /* บีบขนาดกล่องไม่ให้กว้างเกินไปเมื่ออยู่ตรงกลาง */
+        box-shadow: 0 30px 60px rgba(0, 114, 255, 0.05);
+        perspective: 1000px;
+      }
+
+      .social-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .social-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 25px;
+        text-decoration: none;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+        position: relative;
+        transform-style: preserve-3d;
+        will-change: transform;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      }
+
+      .social-card:hover {
+        background: #ffffff;
+        box-shadow: 0 15px 35px rgba(0, 114, 255, 0.08);
+        transform: translateY(-4px);
+        border-color: rgba(0, 114, 255, 0.2);
+      }
+
+      .icon-box {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        background: var(--icon-bg);
+        color: var(--text-main);
+        transition: all 0.3s ease;
+        transform: translateZ(25px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+      }
+
+      .info-box {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translateZ(15px);
+        min-width: 170px;
+      }
+
+      .platform-name {
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .username {
+        font-size: 15px;
+        color: var(--text-muted);
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .card-facebook:hover .icon-box {
+        background-color: var(--fb-color);
+        box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
+        color: #fff;
+      }
+      .card-instagram:hover .icon-box {
+        background: var(--ig-gradient);
+        box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3);
+        color: #fff;
+      }
+      .card-tiktok:hover .icon-box {
+        background-color: var(--tiktok-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        color: #fff;
+      }
+      .card-line:hover .icon-box {
+        background-color: var(--line-color);
+        box-shadow: 0 8px 20px rgba(0, 195, 0, 0.3);
+        color: #fff;
+      }
+
+      .copy-success .username {
+        color: var(--line-color) !important;
+        font-weight: 600;
+      }
+      .copy-success .icon-box {
+        background-color: var(--line-color);
+        color: #fff;
+      }
+
+      /* Responsive สำหรับมือถือ */
+      @media (max-width: 480px) {
+        .contact-container {
+          padding: 30px 20px;
+        }
+        .title {
+          font-size: 28px;
+        }
+        .social-card {
+          padding: 18px;
+          gap: 15px;
+        }
+        .icon-box {
+          width: 50px;
+          height: 50px;
+          font-size: 24px;
+        }
+        .platform-name {
+          font-size: 18px;
+        }
+        .username {
+          font-size: 13px;
+        }
+        .title-icon {
+          font-size: 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+    <div class="glow-orb-3"></div>
+
+    <div class="main-wrapper">
+      <!-- ส่วนหัว: ไอคอนจรวดและข้อความถูกย้ายมาอยู่ตรงกลางด้านบน -->
+      <div class="text-section">
+        <i class="fa-solid fa-paper-plane title-icon"></i>
+        <h1 class="title">ช่องทางติดต่อ</h1>
+      </div>
+
+      <!-- ส่วนการ์ดติดต่อ: อยู่ตรงกลางด้านล่างส่วนหัว -->
+      <div class="contact-container">
+        <div class="social-grid">
+          <a href="https://www.facebook.com/share/1BCEvcqLb7/" class="social-card card-facebook" target="_blank">
+            <div class="icon-box"><i class="fa-brands fa-facebook-f"></i></div>
+            <div class="info-box">
+              <div class="platform-name">Facebook</div>
+              <div class="username">Chainimit Worawong</div>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/chainimit_nong?igsh=OGQzdGgwbDVjaHp4" class="social-card card-instagram" target="_blank">
+            <div class="icon-box"><i class="fa-brands fa-instagram"></i></div>
+            <div class="info-box">
+              <div class="platform-name">Instagram</div>
+              <div class="username">@chainimit_nong</div>
+            </div>
+          </a>
+
+          <a href="https://www.tiktok.com/@cw_nong01?is_from_webapp=1&sender_device=pc" class="social-card card-tiktok" target="_blank">
+            <div class="icon-box"><i class="fa-brands fa-tiktok"></i></div>
+            <div class="info-box">
+              <div class="platform-name">TikTok</div>
+              <div class="username">@cw_nong01</div>
+            </div>
+          </a>
+
+          <div
+            class="social-card card-line"
+            id="copyLineBtn"
+            data-line-id="jumdo_11234"
+          >
+            <div class="icon-box"><i class="fa-brands fa-line"></i></div>
+            <div class="info-box">
+              <div class="platform-name">LINE Official</div>
+              <div class="username" id="lineStatusText">
+                ID: jumdo_11234 <i class="fa-regular fa-copy"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="contact.js"></script>
+  </body>
+</html>
