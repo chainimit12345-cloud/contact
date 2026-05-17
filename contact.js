@@ -4,11 +4,11 @@
 
 // 📱 รายการเบอร์โทรศัพท์
 const phoneList = [
-  {
-    label: "เบอร์โทรหลัก (Mobile)",
-    displayValue: "081-234-5678",
-    fullValue: "0812345678",
-  },
+  // {
+  //   label: "เบอร์โทรหลัก (Mobile)",
+  //   displayValue: "081-234-5678",
+  //   fullValue: "0812345678",
+  // },
   // ตัวอย่างการเพิ่มเบอร์ที่ 2 (เอาคอมเมนต์ออกแล้วพิมพ์เพิ่มได้เลย)
   /*
     ,{
@@ -23,8 +23,8 @@ const phoneList = [
 const emailList = [
   {
     label: "อีเมลติดต่องาน",
-    displayValue: "contact@yourdomain.com",
-    fullValue: "contact@yourdomain.com",
+    displayValue: "chainimitr.w@ku.th",
+    fullValue: "chainimitr.w@ku.th",
   },
   /*
     ,{
