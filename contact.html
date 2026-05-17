@@ -2,8 +2,9 @@
 <html lang="th">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ช่องทางติดต่อ</title>
+    <!-- แก้ไขบรรทัดนี้: เพิ่มการล็อคซูม (user-scalable=no) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ข้อมูลติดเพิ่มเติม</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap"
@@ -55,6 +56,8 @@
         padding: 40px 20px;
         overflow-x: hidden;
         position: relative;
+        /* ป้องกันการเผลอทัชหรือคลุมดำข้อความที่อาจทำให้จอขยับ */
+        -webkit-text-size-adjust: 100%;
       }
 
       /* กราฟิกแสงออร่า */
